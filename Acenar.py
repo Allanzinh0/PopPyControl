@@ -1,5 +1,6 @@
-from poppy.creatures import PoppyHumanoid
 import time
+
+from poppy.creatures import PoppyHumanoid
 
 poppy = PoppyHumanoid(simulator = 'vrep')
 
