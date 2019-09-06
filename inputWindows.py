@@ -53,14 +53,16 @@ while True:
             angle = input('Digite o angulo desejado: ')
 
             for motor in poppy.motors:
-                if idMotor == int(motor.id):
+                if idMotor == int(motor.id) and angle <= 359 and angle >= -359:
                     motor.goto_position(angle, 0.5, wait = True)
                     if hist[motor.name] == 'Verificado':
                         hist[motor.name] = 'Movido e Verificado'
                     elif not motor.name in hist:
                         hist[motor.name] = 'Movido'
+                else:
+                    print('\n\nO angulo fornecido e invalido.')
         else:
-            print('O ID fornecido nao esta registrado')
+            print('\n\nO ID fornecido nao esta registrado.')
             time.sleep(2)
 
     if choice == 'h':
