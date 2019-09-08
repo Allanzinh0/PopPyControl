@@ -40,10 +40,9 @@ while True:
             for motor in poppy.motors:
                 if idMotor == int(motor.id):
                     print("Posicao atual: {0}".format(motor.present_position))
-                    if str(motor.name) in hist:
-                        if hist[str(motor.name)] == 'Movido':
-                            hist[str(motor.name)] = 'Movido e Verificado'
-                    else:
+                    if str(motor.name) in hist and hist[str(motor.name)] == 'Movido':
+                        hist[str(motor.name)] = 'Movido e Verificado'
+                    elif not str(motor.name) in hist:
                         hist[str(motor.name)] = 'Verificado'
         else:
             print('O ID fornecido nao esta registrado.')
@@ -56,10 +55,9 @@ while True:
                 for motor in poppy.motors:
                     if idMotor == int(motor.id):
                         motor.goto_position(angle, 0.5, wait = True)
-                        if str(motor.name) in hist:
-                            if hist[str(motor.name)] == 'Verificado':
-                                hist[str(motor.name)] = 'Movido e Verificado'
-                        else:
+                        if str(motor.name) in hist and hist[str(motor.name)] == 'Verificado':
+                            hist[str(motor.name)] = 'Movido e Verificado'
+                        elif not str(motor.name) in hist:
                             hist[str(motor.name)] = 'Movido'
             else:
                 print('\n\nO angulo fornecido e invalido.')
@@ -72,6 +70,6 @@ while True:
         for motor, action in hist.items():
             print('| {:<13} foi {:<20} |'.format(str(motor), str(action)))
         print('-'*42)
-        time.sleep(5)
+        final = raw_input('Pressione [ENTER] para continuar. . .')
     time.sleep(1)
     clear()
