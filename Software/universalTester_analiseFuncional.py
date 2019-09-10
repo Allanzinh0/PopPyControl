@@ -5,6 +5,7 @@ from os import system, name
 
 poppy = PoppyHumanoid(simulator = 'vrep')
 
+
 # def findMotorName(ID):
 #     for motor in poppy.motors:
 #         if ID == int(motor.id):
@@ -22,9 +23,26 @@ poppy = PoppyHumanoid(simulator = 'vrep')
 #     else:
 #         currentMotor = findMotorObject(ID)
 #         poppy.motors.currentMotor.complient = state
-    
 
-# defineComplients(False)
+def findMotor(ID):
+    for motor in poppy.motors:
+        if ID == int(motor.id):
+            return str(motor.name)
+
+def defineComplients(state, ID=None):
+    if ID == None:
+        for motor in poppy.motors:
+            motor.complient = state
+    else:
+        currentMotor = findMotor(ID)
+        getattr(poppy, currentMotor).complient = state
+
+def motorPosition(ID):
+    for motor in poppy.motors:
+        if ID == int(motor.id):
+            return int(motor.present_position)
+
+defineComplients(False)
 
 for motor in poppy.motors:
     motor.complient = False
@@ -48,10 +66,10 @@ def clear():
 clear()
 
 while True:
-    print('-'*24)
+    print('-'*36)
     for motor in poppy.motors:
-        print('| {:<13} id: {:<2} |'.format(str(motor.name), str(motor.id)))
-    print('-'*24)
+        print('| {:<13} id: {:<2} pos: {:>6} |'.format(str(motor.name), str(motor.id), str(motor.present_position)))
+    print('-'*36)
 
     choice = raw_input('Deseja mover, verificar o encoder, acessar o historico ou analisar posicoes? (m|v|h|a): ')
 
@@ -104,23 +122,13 @@ while True:
         idMotor = input('Digite o id do motor a ser analisado: ')
 
         if idMotor in IDs:
-            # currentMotor = findMotorName(idMotor)
-            # currentMotorObject = findMotorObject(idMotor)
-            currentMotor = ''
-            currentPosition = 0
-            for motor in poppy.motors:
-                if int(motor.id) == idMotor:
-                    motor.complient = True
-                    currentMotor = motor.name
-                    
+            currentMotor = findMotor(idMotor)
+            defineComplients(True, idMotor)
             print('\nComplient ligado!')
             time.sleep(2)
             readyCheck = raw_input('\nPressione [ENTER] para desligar o complient de {0}.\n'.format(currentMotor))
-            for motor in poppy.motors:
-                if int(motor.id) == idMotor:
-                    motor.complient = False
-                    currentPosition = motor.present_position
-            print('O motor em questao ({0}) esta na posicao: {1} graus.'.format(currentMotor, currentPosition))
+            defineComplients(False, idMotor)
+            print('O motor em questao ({0}) esta na posicao: {1} graus.'.format(currentMotor, motorPosition(idMotor)))
             finalCheck = raw_input('\n\nPressione [ENTER] para continuar . . .')
 
     clear()
