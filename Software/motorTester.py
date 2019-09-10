@@ -135,9 +135,9 @@ while True:
         now = datetime.datetime.now()
         today = now.strftime('%x')
     
-        fileName = raw_input('\nQual vai ser o nome do arquivo?\n\n')
-    
-        register = open(str('../Data/motorTester' + fileName + '.txt'), 'a+')
+        fileName = raw_input('\nQual vai ser o nome do arquivo? (insira o mesmo nome do anterior caso ja tenha criado um)\n\n')
+        
+        register = open(str('../Data/motorTester/' + fileName + '.txt'), 'w+')
         register.write(today)
         
         for motor, action in hist.items():
