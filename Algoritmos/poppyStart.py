@@ -1,4 +1,4 @@
-from poppy.creatures import PoppyHumanoid
+from pypot.creatures import PoppyHumanoid
 import time
 
 poppy = PoppyHumanoid(simulator = 'vrep')

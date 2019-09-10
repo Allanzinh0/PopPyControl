@@ -1,0 +1,1 @@
+Dados referentes à testes de motores realizados através do algoritmo multfuncional motorTester.py, incluso na pasta softwares.
