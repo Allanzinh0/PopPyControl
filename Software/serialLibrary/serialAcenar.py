@@ -58,3 +58,6 @@ time.sleep(0.1)
 goToPosition(torso, 44, 1701)
 goToPosition(torso, 54, 3409)
 time.sleep(0.1)
+
+torso.close()
+legs.close()
