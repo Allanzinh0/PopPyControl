@@ -8,7 +8,7 @@ def writeCommand(port, id, address, size, value):
         req = header + chr(hex(value))
         checksum = hex(255 - ((0xFF + 0xFF + hex(id) + length + 0x03 + hex(address) + hex(value))%256))
     elif size == 2:
-        value1 = value - (value%256)
+        value1 = (value - (value%256))/256
         value2 = value%256
         req = header + chr(hex(value1)) + chr(hex(value2))
         checksum = hex(255 - ((0xFF + 0xFF + hex(id) + length + 0x03 + hex(address) + hex(value1) + hex(value2))%256))
