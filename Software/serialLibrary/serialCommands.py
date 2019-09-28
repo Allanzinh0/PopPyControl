@@ -19,7 +19,7 @@ def writeCommand(port, id, address, size, value): #Simplifies the hexadecimal co
         checksum = int(253 - ((0xFF + 0xFF + int(id) + length + 0x03 + int(address) + int(value1) + int(value2))%256))
 
     port.write(req+chr(checksum))
-    return readCommand(port, id, address, size)
+#    return readCommand(port, id, address, size)
 
 def readCommand(port, id, address, size):
     readed = list()

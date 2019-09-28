@@ -39,181 +39,181 @@
         "lHipX": {
             "id": 11,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1878,
+                "max": 2291
             }
         },
         "lHipZ": {
             "id": 12,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 2040,
+                "max": 2977
             }
         },
         "lHipY": {
             "id": 13,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1130,
+                "max": 2450
             }
         },
         "lKnee": {
             "id": 14,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 581,
+                "max": 2020
             }
         },
         "lAnkle": {
             "id": 15,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1500,
+                "max": 2249
             }
         },
 
         "rHipX": {
             "id": 21,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1788,
+                "max": 2310
             }
         },
         "rHipZ": {
             "id": 22,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1154,
+                "max": 2331
             }
         },
         "rHipY": {
             "id": 23,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1687,
+                "max": 3040
             }
         },
         "rKnee": {
             "id": 24,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 660,
+                "max": 2000
             }
         },
         "rAnkle": {
             "id": 25,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1694,
+                "max": 2384
             }
         },
 
         "absY": {
             "id": 31,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1700,
+                "max": 2130
             }
         },
         "absX": {
             "id": 32,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1710,
+                "max": 2294
             }
         },
         "absZ": {
             "id": 33,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1570,
+                "max": 2540
             }
         },
         "bustY": {
             "id": 34,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1635,
+                "max": 2230
             }
         },
         "bustX": {
             "id": 35,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1640,
+                "max": 2450
             }
         },
 
         "headZ": {
             "id": 36,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 342,
+                "max": 700
             }
         },
         "headY": {
             "id": 37,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 398,
+                "max": 478
             }
         },
 
         "lShoulderY": {
             "id": 41,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 688,
+                "max": 3570
             }
         },
         "lShoulderX": {
             "id": 42,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1200,
+                "max": 3230
             }
         },
         "lArm": {
             "id": 43,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 810,
+                "max": 2880
             }
         },
         "lElbow": {
             "id": 44,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1060,
+                "max": 2570
             }
         },
 
         "rShoulderY": {
             "id": 51,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 530,
+                "max": 3480
             }
         },
         "rShoulderX": {
             "id": 52,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1030,
+                "max": 3050
             }
         },
         "rArm": {
             "id": 53,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 970,
+                "max": 3080
             }
         },
         "rElbow": {
             "id": 54,
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 2130,
+                "max": 3580
             }
         }
     }
