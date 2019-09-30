@@ -52,6 +52,9 @@ def readCommand(port, id, address, size):
 def setTorque(serialPort, ID, finalState):           #Defines the Torque to a motor
     writeCommand(serialPort, ID, 24, 1, finalState)  #Serial port = legs/torso | ID = Motor ID | finalState -> 0 to deactivate -> 1 to activate
 
+def setTorquesByName(serialPort, name, finalState):
+    writeCommand(serialPort, getIDByMotorName(str(name)), 24, 1, finalState)  #Serial port = legs/torso | ID = Motor ID | finalState -> 0 to deactivate -> 1 to activate
+
 def setTorques(serialPort, IDlist, finalState):
     for ID in IDlist:
         setTorque(serialPort, ID, finalState)
@@ -59,12 +62,32 @@ def setTorques(serialPort, IDlist, finalState):
 def setTorquePower(serialPort, ID, torquePower):
     writeCommand(serialPort, ID, 34, 2, torquePower)
 
+def setTorquePowerByName(serialPort, name, torquePower):
+    writeCommand(serialPort, getIDByMotorName(str(name)), 34, 2, torquePower)
+
 def setTorquesPower(serialPort, IDlist, torquePower):
     for ID in IDlist:
         writeCommand(serialPort, ID, 34, 2, torquePower)
 
 def goToPosition(serialPort, ID, goalPosition):
-    writeCommand(serialPort, ID, 30, 2, goalPosition)
+    with open(data/motors.json) as motors:
+        motorObj = getMotorObject(str(getMotorNameByID(int(ID))))
+
+        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]
+            writeCommand(serialPort, ID, 30, 2, goalPosition)
+        else:
+            print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
+            print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
+
+def goToPositionByMotorName(serialPort, name, goalPosition):
+    with open(data/motors.json) as motors:
+        motorObj = getMotorObject(str(name))
+
+        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]
+            writeCommand(serialPort, getIDByMotorName(str(name)), 30, 2, goalPosition)
+        else:
+            print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
+            print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
 
 def getMotorNameByID(ID):
     with open("data/motors.json") as motors:
@@ -76,6 +99,17 @@ def getMotorNameByID(ID):
         return motorsData["motorsName"]['torso'][str(ID)]
     else:
         print("Servomotor id not found!")
+
+def getIDByMotorName(name):
+    with open("data/motors.json") as motors:
+        motorsData = json.load(motors)
+
+        for motor in motorsData["motors"]:
+            if motor["name"] == str(name):
+                return motor["id"]
+        
+        print("No motor with that name in JSON file!")
+    
 
 def getMotorObject(motorName):
     with open("data/motors.json") as motors:

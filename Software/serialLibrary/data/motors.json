@@ -38,6 +38,7 @@
     "motors": {
         "lHipX": {
             "id": 11,
+            "name": "l_hip_x",
             "angleLimits": {
                 "min": 1878,
                 "max": 2291
@@ -45,6 +46,7 @@
         },
         "lHipZ": {
             "id": 12,
+            "name": "l_hip_z",
             "angleLimits": {
                 "min": 2040,
                 "max": 2977
@@ -52,6 +54,7 @@
         },
         "lHipY": {
             "id": 13,
+            "name": "l_hip_y",
             "angleLimits": {
                 "min": 1130,
                 "max": 2450
@@ -59,6 +62,7 @@
         },
         "lKnee": {
             "id": 14,
+            "name": "l_knee",
             "angleLimits": {
                 "min": 581,
                 "max": 2020
@@ -66,6 +70,7 @@
         },
         "lAnkle": {
             "id": 15,
+            "name": "l_ankle",
             "angleLimits": {
                 "min": 1500,
                 "max": 2249
@@ -74,6 +79,7 @@
 
         "rHipX": {
             "id": 21,
+            "name": "r_hip_x",
             "angleLimits": {
                 "min": 1788,
                 "max": 2310
@@ -81,6 +87,7 @@
         },
         "rHipZ": {
             "id": 22,
+            "name": "r_hip_z",
             "angleLimits": {
                 "min": 1154,
                 "max": 2331
@@ -88,6 +95,7 @@
         },
         "rHipY": {
             "id": 23,
+            "name": "r_hip_y",
             "angleLimits": {
                 "min": 1687,
                 "max": 3040
@@ -95,6 +103,7 @@
         },
         "rKnee": {
             "id": 24,
+            "name": "r_knee",
             "angleLimits": {
                 "min": 660,
                 "max": 2000
@@ -102,6 +111,7 @@
         },
         "rAnkle": {
             "id": 25,
+            "name": "r_ankle",
             "angleLimits": {
                 "min": 1694,
                 "max": 2384
@@ -110,6 +120,7 @@
 
         "absY": {
             "id": 31,
+            "name": "abs_y",
             "angleLimits": {
                 "min": 1700,
                 "max": 2130
@@ -117,6 +128,7 @@
         },
         "absX": {
             "id": 32,
+            "name": "abs_x",
             "angleLimits": {
                 "min": 1710,
                 "max": 2294
@@ -124,6 +136,7 @@
         },
         "absZ": {
             "id": 33,
+            "name": "abs_z",
             "angleLimits": {
                 "min": 1570,
                 "max": 2540
@@ -131,6 +144,7 @@
         },
         "bustY": {
             "id": 34,
+            "name": "bust_y",
             "angleLimits": {
                 "min": 1635,
                 "max": 2230
@@ -138,6 +152,7 @@
         },
         "bustX": {
             "id": 35,
+            "name": "bust_x",
             "angleLimits": {
                 "min": 1640,
                 "max": 2450
@@ -146,6 +161,7 @@
 
         "headZ": {
             "id": 36,
+            "name": "head_z",
             "angleLimits": {
                 "min": 342,
                 "max": 700
@@ -153,6 +169,7 @@
         },
         "headY": {
             "id": 37,
+            "name": "head_y",
             "angleLimits": {
                 "min": 398,
                 "max": 478
@@ -161,6 +178,7 @@
 
         "lShoulderY": {
             "id": 41,
+            "name": "l_shoulder_y",
             "angleLimits": {
                 "min": 688,
                 "max": 3570
@@ -168,6 +186,7 @@
         },
         "lShoulderX": {
             "id": 42,
+            "name": "l_shoulder_x",
             "angleLimits": {
                 "min": 1200,
                 "max": 3230
@@ -175,6 +194,7 @@
         },
         "lArm": {
             "id": 43,
+            "name": "l_arm",
             "angleLimits": {
                 "min": 810,
                 "max": 2880
@@ -182,6 +202,7 @@
         },
         "lElbow": {
             "id": 44,
+            "name": "l_elbow",
             "angleLimits": {
                 "min": 1060,
                 "max": 2570
@@ -190,27 +211,34 @@
 
         "rShoulderY": {
             "id": 51,
+            "name": "r_shoulder_y",
             "angleLimits": {
                 "min": 530,
                 "max": 3480
             }
         },
+
         "rShoulderX": {
             "id": 52,
+            "name": "r_shoulder_x",
             "angleLimits": {
                 "min": 1030,
                 "max": 3050
             }
         },
+
         "rArm": {
             "id": 53,
+            "name": "r_arm",
             "angleLimits": {
                 "min": 970,
                 "max": 3080
             }
         },
+
         "rElbow": {
             "id": 54,
+            "name": "r_elbow",
             "angleLimits": {
                 "min": 2130,
                 "max": 3580
