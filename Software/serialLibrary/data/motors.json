@@ -1,247 +1,322 @@
 {
     "motorsName": {
         "legs": {
-            "11": "lHipX",
-            "12": "lHipZ",
-            "13": "lHipY",
-            "14": "lKnee",
-            "15": "lAnkle",
+            "11": "l_hip_x",
+            "12": "l_hip_z",
+            "13": "l_hip_y",
+            "14": "l_knee",
+            "15": "l_ankle",
 
-            "21": "rHipX",
-            "22": "rHipZ",
-            "23": "rHipY",
-            "24": "rKnee",
-            "25": "rAnkle"
+            "21": "r_hip_x",
+            "22": "r_hip_z",
+            "23": "r_hip_y",
+            "24": "r_knee",
+            "25": "r_ankle"
         },
         "torso": {
-            "31": "absY",
-            "32": "absX",
-            "33": "absZ",
-            "34": "bustY",
-            "35": "bustX",
+            "31": "abs_y",
+            "32": "abs_x",
+            "33": "abs_z",
+            "34": "bust_y",
+            "35": "bust_x",
 
-            "36": "headZ",
-            "37": "headY",
+            "36": "head_z",
+            "37": "head_y",
 
-            "41": "lShoulderY",
-            "42": "lShoulderX",
-            "43": "lArm",
-            "44": "lElbow",
+            "41": "l_shoulder_y",
+            "42": "l_shoulder_x",
+            "43": "l_arm",
+            "44": "l_elbow",
 
-            "51": "rShoulderY",
-            "52": "rShoulderX",
-            "53": "rArm",
-            "54": "rElbow"
+            "51": "r_shoulder_y",
+            "52": "r_shoulder_x",
+            "53": "r_arm",
+            "54": "r_elbow"
         }
     },
 
     "motors": {
-        "lHipX": {
+        "l_hip_x": {
             "id": 11,
             "name": "l_hip_x",
             "angleLimits": {
                 "min": 1878,
                 "max": 2291
+            },
+            "prefabPositions": {
+                "standing": 2180
             }
         },
-        "lHipZ": {
+        "l_hip_z": {
             "id": 12,
             "name": "l_hip_z",
             "angleLimits": {
-                "min": 2040,
+                "min": 2015,
                 "max": 2977
+            },
+            "prefabPositions": {
+                "standing": 2015
             }
         },
-        "lHipY": {
+        "l_hip_y": {
             "id": 13,
             "name": "l_hip_y",
             "angleLimits": {
                 "min": 1130,
                 "max": 2450
+            },
+            "prefabPositions": {
+                "standing": 2239
             }
         },
-        "lKnee": {
+        "l_knee": {
             "id": 14,
             "name": "l_knee",
             "angleLimits": {
                 "min": 581,
                 "max": 2020
+            },
+            "prefabPositions": {
+                "standing": 1978
             }
         },
-        "lAnkle": {
+        "l_ankle": {
             "id": 15,
             "name": "l_ankle",
             "angleLimits": {
                 "min": 1500,
                 "max": 2249
+            },
+            "prefabPositions": {
+                "standing": 1774
             }
         },
 
-        "rHipX": {
+        "r_hip_x": {
             "id": 21,
             "name": "r_hip_x",
             "angleLimits": {
                 "min": 1788,
                 "max": 2310
+            },
+            "prefabPositions": {
+                "standing": 1948
             }
         },
-        "rHipZ": {
+        "r_hip_z": {
             "id": 22,
             "name": "r_hip_z",
             "angleLimits": {
                 "min": 1154,
                 "max": 2331
+            },
+            "prefabPositions": {
+                "standing": 2315
             }
         },
-        "rHipY": {
+        "r_hip_y": {
             "id": 23,
             "name": "r_hip_y",
             "angleLimits": {
                 "min": 1687,
                 "max": 3040
+            },
+            "prefabPositions": {
+                "standing": 1975
             }
         },
-        "rKnee": {
+        "r_knee": {
             "id": 24,
             "name": "r_knee",
             "angleLimits": {
                 "min": 660,
                 "max": 2000
+            },
+            "prefabPositions": {
+                "standing": 1991
             }
         },
-        "rAnkle": {
+        "r_ankle": {
             "id": 25,
             "name": "r_ankle",
             "angleLimits": {
                 "min": 1694,
                 "max": 2384
+            },
+            "prefabPositions": {
+                "standing": 2099
             }
         },
 
-        "absY": {
+        "abs_y": {
             "id": 31,
             "name": "abs_y",
             "angleLimits": {
                 "min": 1700,
                 "max": 2130
+            },
+            "prefabPositions": {
+                "standing": 1990
             }
         },
-        "absX": {
+        "abs_x": {
             "id": 32,
             "name": "abs_x",
             "angleLimits": {
                 "min": 1710,
                 "max": 2294
+            },
+            "prefabPositions": {
+                "standing": 2023
             }
         },
-        "absZ": {
+        "abs_z": {
             "id": 33,
             "name": "abs_z",
             "angleLimits": {
                 "min": 1570,
                 "max": 2540
+            },
+            "prefabPositions": {
+                "standing": 2020
             }
         },
-        "bustY": {
+        "bust_y": {
             "id": 34,
             "name": "bust_y",
             "angleLimits": {
                 "min": 1635,
                 "max": 2230
+            },
+            "prefabPositions": {
+                "standing": 2040
             }
         },
-        "bustX": {
+        "bust_x": {
             "id": 35,
             "name": "bust_x",
             "angleLimits": {
                 "min": 1640,
                 "max": 2450
+            },
+            "prefabPositions": {
+                "standing": 2042
             }
         },
 
-        "headZ": {
+        "head_z": {
             "id": 36,
             "name": "head_z",
             "angleLimits": {
                 "min": 342,
                 "max": 700
+            },
+            "prefabPositions": {
+                "standing": 505
             }
         },
-        "headY": {
+        "head_y": {
             "id": 37,
             "name": "head_y",
             "angleLimits": {
                 "min": 398,
                 "max": 478
+            },
+            "prefabPositions": {
+                "standing": 410
             }
         },
 
-        "lShoulderY": {
+        "l_shoulder_y": {
             "id": 41,
             "name": "l_shoulder_y",
             "angleLimits": {
                 "min": 688,
                 "max": 3570
+            },
+            "prefabPositions": {
+                "standing": 3095
             }
         },
-        "lShoulderX": {
+        "l_shoulder_x": {
             "id": 42,
             "name": "l_shoulder_x",
             "angleLimits": {
                 "min": 1200,
-                "max": 3230
+                "max": 3252
+            },
+            "prefabPositions": {
+                "standing": 3252
             }
         },
-        "lArm": {
+        "l_arm": {
             "id": 43,
             "name": "l_arm",
             "angleLimits": {
                 "min": 810,
                 "max": 2880
+            },
+            "prefabPositions": {
+                "standing": 1834
             }
         },
-        "lElbow": {
+        "l_elbow": {
             "id": 44,
             "name": "l_elbow",
             "angleLimits": {
                 "min": 1060,
                 "max": 2570
+            },
+            "prefabPositions": {
+                "standing": 1230
             }
         },
 
-        "rShoulderY": {
+        "r_shoulder_y": {
             "id": 51,
             "name": "r_shoulder_y",
             "angleLimits": {
                 "min": 530,
                 "max": 3480
+            },
+            "prefabPositions": {
+                "standing": 1035
             }
         },
 
-        "rShoulderX": {
+        "r_shoulder_x": {
             "id": 52,
             "name": "r_shoulder_x",
             "angleLimits": {
                 "min": 1030,
                 "max": 3050
+            },
+            "prefabPositions": {
+                "standing": 1083
             }
         },
 
-        "rArm": {
+        "r_arm": {
             "id": 53,
             "name": "r_arm",
             "angleLimits": {
                 "min": 970,
                 "max": 3080
+            },
+            "prefabPositions": {
+                "standing": 2058
             }
         },
 
-        "rElbow": {
+        "r_elbow": {
             "id": 54,
             "name": "r_elbow",
             "angleLimits": {
                 "min": 2130,
                 "max": 3580
+            },
+            "prefabPositions": {
+                "standing": 2222
             }
         }
     }

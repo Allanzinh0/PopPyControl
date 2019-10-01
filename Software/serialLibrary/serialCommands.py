@@ -2,7 +2,7 @@ from serial import Serial
 import json
 import time
 
-def writeCommand(port, id, address, size, value): #Simplifies the hexadecimal command
+def writeCommand(port, id, address, size, value): # Simplifies the hexadecimal command
     value1 = 0
     value2 = 0
     
@@ -70,20 +70,20 @@ def setTorquesPower(serialPort, IDlist, torquePower):
         writeCommand(serialPort, ID, 34, 2, torquePower)
 
 def goToPosition(serialPort, ID, goalPosition):
-    with open(data/motors.json) as motors:
+    with open("data/motors.json") as motors:
         motorObj = getMotorObject(str(getMotorNameByID(int(ID))))
 
-        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]
+        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, ID, 30, 2, goalPosition)
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
             print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
 
 def goToPositionByMotorName(serialPort, name, goalPosition):
-    with open(data/motors.json) as motors:
+    with open("data/motors.json") as motors:
         motorObj = getMotorObject(str(name))
 
-        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]
+        if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, getIDByMotorName(str(name)), 30, 2, goalPosition)
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
@@ -136,10 +136,13 @@ def defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso):
         angleMax = int(motorsData['motors'][motorLegs]['angleLimits']['max'])
 
         setTorque(serialPortLegs, idMotor, 0)
+        print("Torque desativated for motor {}".format(str(motorsData['motors'][motorLegs]['name'])))
         time.sleep(0.1)
         writeCommand(serialPortLegs, idMotor, 6, 2, angleMin)
+        print("Angle Limit Min defined for motor {}".format(str(motorsData['motors'][motorLegs]['name'])))
         time.sleep(0.1)
         writeCommand(serialPortLegs, idMotor, 8, 2, angleMax)
+        print("Angle Limit Max defined for motor {}".format(str(motorsData['motors'][motorLegs]['name'])))
         time.sleep(0.1)
 
     for motorTorso in idsTorso:
@@ -148,8 +151,38 @@ def defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso):
         angleMax = int(motorsData['motors'][motorTorso]['angleLimits']['max'])
 
         setTorque(serialPortTorso, idMotor, 0)
+        print("Torque desativated for motor {}".format(str(motorsData['motors'][motorTorso]['name'])))
         time.sleep(0.1)
         writeCommand(serialPortTorso, idMotor, 6, 2, angleMin)
+        print("Angle Limit Min defined for motor {}".format(str(motorsData['motors'][motorTorso]['name'])))
         time.sleep(0.1)
         writeCommand(serialPortTorso, idMotor, 8, 2, angleMax)
+        print("Angle Limit Max defined for motor {}".format(str(motorsData['motors'][motorTorso]['name'])))
         time.sleep(0.1)
+
+def setPositionPredefined(serialPortLegs, serialPortTorso, positionName):
+    with open("data/motors.json") as motors:
+        motorsData = json.load(motors)
+
+    defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso)
+
+    motorLegs = []
+    motorTorso = []
+
+    for i in motorsData['motors']:
+        motorLegs.append(str(motorsData['motors'][i]["name"]))
+    for j in motorsData['motors']:
+        motorTorso.append(str(motorsData['motors'][j]["name"]))
+
+    for legs in motorLegs:
+        motor = getMotorObject(legs)
+
+        goToPosition(serialPortLegs, int(motor["id"]), int(motor["prefabPositions"][positionName]))
+        time.sleep(0.5)
+
+    for Torso in motorTorso:
+        motor = getMotorObject(Torso)
+
+        goToPosition(serialPortTorso, int(motor["id"]), int(motor["prefabPositions"][positionName]))
+        time.sleep(0.5)
+        
