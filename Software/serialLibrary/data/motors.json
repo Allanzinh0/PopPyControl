@@ -146,18 +146,6 @@
                 "standing": 2023
             }
         },
-        "abs_z": {
-            "id": 33,
-            "name": "abs_z",
-            "type": "torso",
-            "angleLimits": {
-                "min": 1570,
-                "max": 2540
-            },
-            "positions": {
-                "standing": 2020
-            }
-        },
         "bust_y": {
             "id": 34,
             "name": "bust_y",
