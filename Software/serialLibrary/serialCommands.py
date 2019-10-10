@@ -19,34 +19,41 @@ def writeCommand(port, id, address, size, value): # Simplifies the hexadecimal c
         checksum = int(255 - ((0xFF + 0xFF + int(id) + length + 0x05 + int(address) + int(value1) + int(value2))%256))
 
     port.write(req+chr(checksum))
-#    return readCommand(port, id, address, size)
+    port.flush()
+    print('Instruction received: ' + readCommand(port))
 
-# def readCommand(port, id, address, size):
-#     readed = list()
-#     try:
-#         h1 = port.read()
-# 	assert ord(h1) == 255
-#     except:
-# 	e = 'Timeout on servo ' + str(id)
-#         raise ValueError('Timeout servo '+ str(id))
-    
-#     try:
-#         h2 = port.read()
-#         origin = port.read()
-#         length = ord(port.read()) - 1
-#         error = ord(port.read())
+def readCommand(port):
+    readed = "|"
+    try:
+        h1 = port.read()
+	print(str(hex(h1)))
+	assert ord(h1) == 255
+    except:
+	e = 'Timeout on servo ' + str(id)
+        raise ValueError('Timeout servo '+ str(id))
+  
+    try:
+        h2 = port.read()
+        origin = port.read()
+        length = ord(port.read()) - 1
+        error = ord(port.read())
+	print(str(hex(h2)))
+	print(str(hex(origin)))
+	print(str(hex(length + 1)))
+	print(str(bin(error)))
+	
+	for i in range(length):
+            readed += str(hex(port.read())) + '|'
+	    print(readed)
 
-#         for i in range(length):
-#             readed.append(ord(port.read()))
-#             length -= 1
-
-# 	    if error != 0:
-# 	        e = 'Error from servo ' + str(id) + ' error: ' + str(hex(error))
-# 	        raise ValueError('Error ' + str(hex(error)) + ' in servo ' + str(id))
-
-#         return readed
-#     except:
-# 	    raise ValueError('Critical error!')
+	if error != 0:
+            e = 'Error from servo ' + str(id) + ' error: ' + str(hex(error))
+            raise ValueError('Error ' + str(hex(error)) + ' in servo ' + str(id))
+	if error == 0:
+	    readed += '|'
+	    return readed
+     except:
+ 	    raise ValueError('Critical error!')
 	
 
 def setTorque(serialPort, ID, finalState):           #Defines the Torque to a motor
