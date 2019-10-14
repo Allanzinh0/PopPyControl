@@ -91,7 +91,7 @@
             "type": "legs",
             "angleLimits": {
                 "min": 1687,
-                "max": 3040
+                "max": 3150
             },
             "positions": {
                 "standing": 1975
@@ -128,7 +128,7 @@
             "type": "torso",
             "angleLimits": {
                 "min": 1700,
-                "max": 2130
+                "max": 2200
             },
             "positions": {
                 "standing": 1990
@@ -289,7 +289,7 @@
             "name": "r_elbow",
             "type": "torso",
             "angleLimits": {
-                "min": 2130,
+                "min": 2060,
                 "max": 3580
             },
             "positions": {

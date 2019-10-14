@@ -82,6 +82,7 @@ def goToPosition(serialPort, ID, goalPosition):
 
         if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, ID, 30, 2, goalPosition)
+	    print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
             print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
@@ -92,6 +93,7 @@ def goToPositionByMotorName(serialPort, name, goalPosition):
 
         if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, getIDByMotorName(str(name)), 30, 2, goalPosition)
+	    print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
             print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
@@ -103,8 +105,8 @@ def getMotorNameByID(ID):
     name = ""
 
     for motor in motorsData["motors"]:
-        if ID == motor["id"]:
-            name = motor["name"]
+        if ID == motorsData['motors'][motor]["id"]:
+            name = motorsData['motors'][motor]["name"]
 
     if name != "":
         return name
@@ -116,8 +118,8 @@ def getIDByMotorName(name):
         motorsData = json.load(motors)
 
         for motor in motorsData["motors"]:
-            if motor["name"] == str(name):
-                return motor["id"]
+            if motorsData['motors'][motor]["name"] == str(name):
+                return motorsData['motors'][motor]["id"]
         
         print("No motor with that name in JSON file!")
     
@@ -136,11 +138,11 @@ def defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso):
     namesLegs = []
     namesTorso = []
 
-    for i in motorsData['motors']:
-        if i["type"] == "legs":
-            namesLegs.append(str(i["name"]))
-        elif i["type"] == "torso":
-            namesTorso.append(str(i["name"]))
+    for motor in motorsData["motors"]:
+        if motorsData['motors'][motor]['type'] == "legs":
+            namesLegs.append(str(motorsData['motors'][motor]["name"]))
+        elif motorsData['motors'][motor]['type'] == "torso":
+            namesTorso.append(str(motorsData['motors'][motor]["name"]))
 
     for motorLegs in namesLegs:
         idMotor = int(motorsData['motors'][motorLegs]['id'])
@@ -171,31 +173,3 @@ def defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso):
         writeCommand(serialPortTorso, idMotor, 8, 2, angleMax)
         print("Angle Limit Max defined for motor {}".format(str(motorsData['motors'][motorTorso]['name'])))
         time.sleep(0.1)
-
-def setPositionPredefined(serialPortLegs, serialPortTorso, positionName):
-    with open("data/motors.json") as motors:
-        motorsData = json.load(motors)
-
-    defineAngleLimitsFromJSON(serialPortLegs, serialPortTorso)
-
-    namesLegs = []
-    namesTorso = []
-
-    for i in motorsData['motors']:
-        if i["type"] == "legs":
-            namesLegs.append(str(i["name"]))
-        elif i["type"] == "torso":
-            namesTorso.append(str(i["name"]))
-
-    for legs in namesLegs:
-        motor = getMotorObject(legs)
-
-        goToPosition(serialPortLegs, int(motor["id"]), int(motor["positions"][positionName]))
-        time.sleep(0.5)
-
-    for Torso in namesTorso:
-        motor = getMotorObject(Torso)
-
-        goToPosition(serialPortTorso, int(motor["id"]), int(motor["positions"][positionName]))
-        time.sleep(0.5)
-        
