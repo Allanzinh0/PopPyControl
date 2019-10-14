@@ -9,7 +9,7 @@ legs = Serial('/dev/ttyACM0', 1000000)
 torso = Serial('/dev/ttyACM1', 1000000)
 
 idsLegs = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25]
-idsTorso = [31, 32, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54]
+idsTorso = [31, 32, 33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54]
 
 startTime = 0.7
 executionTime = 2
@@ -47,8 +47,8 @@ goToPosition(torso, 31, 1943)
 time.sleep(startTime)
 goToPosition(torso, 32, 2093)
 time.sleep(startTime)
-# goToPosition(torso, 33, 0000)
-# time.sleep(startTime)
+goToPosition(torso, 33, 0000)
+time.sleep(startTime)
 goToPosition(torso, 34, 2140)
 time.sleep(startTime)
 goToPosition(torso, 35, 2098)
@@ -74,7 +74,7 @@ time.sleep(startTime)
 goToPosition(torso, 54, 2192)
 time.sleep(startTime)
 
-setTorquesPower(torso, [34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54], 512)
+setTorquesPower(torso, [33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54], 512)
 print('Definindo velocidade do torso MX-28AT!')
 time.sleep(startTime)
 
