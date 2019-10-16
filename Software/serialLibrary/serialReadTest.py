@@ -7,7 +7,10 @@ import time
 
 def readCommand(serialPort):
     readed = ""
+    time.sleep(0.1)
     try:
+        serialPort.reset_input_buffer()
+        
         h1 = serialPort.read()
         readed = str(hex(h1))
         assert ord(h1) == 255
