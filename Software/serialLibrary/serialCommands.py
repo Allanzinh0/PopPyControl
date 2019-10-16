@@ -52,7 +52,7 @@ def goToPosition(serialPort, ID, goalPosition):
 
         if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, ID, 30, 2, goalPosition)
-	        print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
+	    print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
             print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))
@@ -63,7 +63,7 @@ def goToPositionByMotorName(serialPort, name, goalPosition):
 
         if goalPosition <= motorObj["angleLimits"]["max"] and goalPosition >= motorObj["angleLimits"]["min"]:
             writeCommand(serialPort, getIDByMotorName(str(name)), 30, 2, goalPosition)
-	        print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
+	    print("Motor {0} with ID: {1} is going to position {2}".format(motorObj["name"], motorObj["id"], goalPosition))
         else:
             print("Goal position out of bounds for {0}! Code not executed.".format(motorObj["name"]))
             print("Limits for this motor: {0} --> {1}".format(motorObj["angleLimits"]["min"], motorObj["angleLimits"]["max"]))

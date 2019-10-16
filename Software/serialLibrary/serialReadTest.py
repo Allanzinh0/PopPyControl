@@ -9,11 +9,11 @@ def readCommand(serialPort):
     readed = ""
     time.sleep(0.1)
     try:
-        serialPort.reset_input_buffer()
+        serialPort.reset_output_buffer()
         
         h1 = serialPort.read()
         readed = str(hex(h1))
-        assert ord(h1) == 255
+	print(readed)
     except:
         e = 'Timeout on servo ' + str(id)
         raise ValueError('Timeout servo '+ str(id))
