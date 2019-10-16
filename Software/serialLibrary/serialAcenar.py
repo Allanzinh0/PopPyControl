@@ -9,7 +9,7 @@ legs = Serial('/dev/ttyACM0', 1000000)
 torso = Serial('/dev/ttyACM1', 1000000)
 
 idsLegs = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25]
-idsTorso = [31, 32, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54]
+idsTorso = [31, 32, 33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54]
 
 startTime = 0.7
 executionTime = 1
@@ -61,9 +61,9 @@ time.sleep(startTime)
 goToPosition(torso, 32, 2047)
 print('Colocando o abdomen em relacao ao X em posicao!')
 time.sleep(startTime)
-#goToPosition(torso, 33, 2040)
-#print('Colocando o abdomen em relacao ao Z em posicao!')
-#time.sleep(startTime)
+goToPosition(torso, 33, 2040)
+print('Colocando o abdomen em relacao ao Z em posicao!')
+time.sleep(startTime)
 goToPosition(torso, 34, 1933)
 print('Colocando o torax em relacao ao Y em posicao!')
 time.sleep(startTime)

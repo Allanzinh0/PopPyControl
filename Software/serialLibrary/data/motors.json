@@ -151,8 +151,8 @@
             "name": "abs_z",
             "type": "torso",
             "angleLimits": {
-                "min": 0,
-                "max": 4095
+                "min": 1540,
+                "max": 2700
             },
             "positions": {
                 "standing": 2020
