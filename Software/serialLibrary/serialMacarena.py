@@ -12,7 +12,7 @@ idsLegs = [11, 12, 13, 14, 15, 21, 22, 23, 24, 25]
 idsTorso = [31, 32, 33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54]
 
 startTime = 0.7
-executionTime = 2
+executionTime = 1
 bufferTime = 0.01
 
 defineAngleLimitsFromJSON(legs, torso)
@@ -75,7 +75,7 @@ goToPosition(torso, 54, 2192)
 time.sleep(startTime)
 
 setTorquesPower(legs, [11, 12, 14, 15, 21, 22, 24, 25], 512)
-setTorquesPower(torso, [33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54], 400)
+setTorquesPower(torso, [33, 34, 35, 36, 37, 41, 42, 43, 44, 51, 52, 53, 54], 512)
 print('Definindo velocidade dos motores MX-28AT!')
 time.sleep(startTime)
 
