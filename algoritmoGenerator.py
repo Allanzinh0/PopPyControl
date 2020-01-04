@@ -82,7 +82,7 @@ with open(nomeAlgoritmo, 'w') as algoritmo:
 
         elif len(command[0]) == 2:
             try:
-                if 0 <= int(command[1]) <= 4095: 
+                if 0 <= int(command[1]) <= 4095:
                     algoritmo.write("    robot.{}.setPosition({})\n".format(
                         motorsValue[int(command[0])],
                         command[1]
@@ -95,7 +95,7 @@ with open(nomeAlgoritmo, 'w') as algoritmo:
                 print('Posicao/ID invalido!')
             except IndexError:
                 print('Posicao invalida')
-        
+
         else:
             print('Comando nao encontrado!')
 
