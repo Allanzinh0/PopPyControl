@@ -2,6 +2,8 @@ from library.protocol import pingCommand, readCommand, writeCommand
 import time
 import json
 
+testMotors = False
+
 
 class Motor:
     def __init__(self, _serialPort, _name, _limits, _robot, motorID, typeMotor):
@@ -12,28 +14,29 @@ class Motor:
         self.limits = _limits
         self.robot = _robot
 
-        tentativas = 0
-        while True:
-            ping = self.ping()
-            if ping['status'] == 'OK':
-                break
-            else:
-                p = 'Tentando conexão com o motor {} id {}'.format(
-                    self.name,
-                    self.id
-                )
-                print(p)
-                time.sleep(0.1)
-                if tentativas > 10:
-                    p = 'Falha ao se conectar com o motor {} id {}'.format(
+        if testMotors:
+            tentativas = 0
+            while True:
+                ping = self.ping()
+                if ping['status'] == 'OK':
+                    break
+                else:
+                    p = 'Tentando conexão com o motor {} id {}'.format(
                         self.name,
                         self.id
                     )
                     print(p)
-                    print('Programa abortado!')
-                    self.robot.close()
-                    exit()
-                tentativas += 1
+                    time.sleep(0.1)
+                    if tentativas > 10:
+                        p = 'Falha ao se conectar com o motor {} id {}'.format(
+                            self.name,
+                            self.id
+                        )
+                        print(p)
+                        print('Programa abortado!')
+                        self.robot.close()
+                        exit()
+                    tentativas += 1
 
         print('Motor {} id {} conectado!'.format(self.name, self.id))
 
@@ -75,7 +78,7 @@ class Motor:
 
     def getSpeed(self):
         response = self.read(38, 2)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -93,7 +96,7 @@ class Motor:
 
     def getTemperature(self):
         response = self.read(43, 1)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -111,7 +114,7 @@ class Motor:
 
     def getPosition(self):
         response = self.read(30, 2)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -121,7 +124,7 @@ class Motor:
             if response['res']['error'] != 0:
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
-                    self.id, 
+                    self.id,
                     response['res']['error']
                 ))
             else:
@@ -130,7 +133,7 @@ class Motor:
 
     def getTorque(self):
         response = self.read(24, 1)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -148,7 +151,7 @@ class Motor:
 
     def getLED(self):
         response = self.read(25, 1)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -166,7 +169,7 @@ class Motor:
 
     def getTorqueLimit(self):
         response = self.read(34, 2)
-        
+
         if response['status'] != 'OK':
             print('Motor {} id {} com problema na conexão!'.format(
                 self.name,
@@ -198,7 +201,7 @@ class Motor:
             ))
             print('Pressione ENTER para abortar o codigo!')
             a = raw_input('Ou "C" + ENTER para continuar: ')
-            
+
             if a == 'C':
                 return "Error"
             else:

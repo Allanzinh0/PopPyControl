@@ -91,7 +91,7 @@ class Poppy:
 
             name = ''
             limits = {}
-        
+
         print('\n\n')
         for id, motor in self.motors.items():
             print(str(motor))
@@ -101,6 +101,7 @@ class Poppy:
         self.serialPortTorso.open()
 
     def close(self):
+        self.clear()
         self.serialPortLegs.close()
         self.serialPortTorso.close()
 
@@ -123,10 +124,10 @@ class Poppy:
                     elif 1029 < load and load < 2048:
                         test = True
                         self.motors[id].setPosition(position + 2)
-            
+
             if not test:
                 break
-    
+
     def clear(self):
         clearPort(self.serialPortLegs)
         clearPort(self.serialPortTorso)

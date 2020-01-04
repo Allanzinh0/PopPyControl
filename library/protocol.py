@@ -35,7 +35,7 @@ def pingCommand(port, id):
             res += hex(ord(test)) + ' '
         else:
             break
-    
+
     req = req.replace('0x', '').split(' ')
 
     if len(res.split(' ')) < 7:
@@ -69,7 +69,7 @@ def readCommand(port, id, address, size):
         return packet
 
     checksum = int(255 - ((int(id) + 0x06 + int(address) + int(size)) % 256))
-    
+
     req += chr(int(0xff))
     req += chr(int(0xff))
     req += chr(int(id))
@@ -78,7 +78,7 @@ def readCommand(port, id, address, size):
     req += chr(int(address))
     req += chr(int(size))
     req += chr(checksum)
-    
+
     port.write(req)
     sleep(delaytime)
 
@@ -99,7 +99,7 @@ def readCommand(port, id, address, size):
     if len(res.split(' ')) < 7:
         packet = {'req': req, 'res': res, 'status': 'Response Null'}
         return packet
-    
+
     elif len(res.split(' ')) == 7:
         value = -1
 
