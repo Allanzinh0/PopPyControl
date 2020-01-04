@@ -1,0 +1,8 @@
+Comandos:
+
+- exit | Sai do Gerador de Algoritmos
+- next | Finaliza a ultima posição e cria uma nova
+- delay [tempo em segundos] | Adiciona um delay com o tempo especificado
+- torque [id] [torque] | Ativa ou desativa o torque do motor
+- torquelimit [id] [torqueLimit] | Define o Limite de torque para o motor especificado
+- [id] [position] | Adiciona uma nova posicao ao motor especificado

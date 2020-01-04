@@ -1,0 +1,312 @@
+{
+    "motors": {
+        "l_hip_x": {
+            "id": 11,
+            "name": "l_hip_x",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1878,
+                "max": 2291
+            },
+            "positions": {
+                "standing": 2180
+            }
+        },
+        "l_hip_z": {
+            "id": 12,
+            "name": "l_hip_z",
+            "type": "legs",
+            "angleLimits": {
+                "min": 2015,
+                "max": 2977
+            },
+            "positions": {
+                "standing": 2015
+            }
+        },
+        "l_hip_y": {
+            "id": 13,
+            "name": "l_hip_y",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1103,
+                "max": 2450
+            },
+            "positions": {
+                "standing": 2239
+            }
+        },
+        "l_knee": {
+            "id": 14,
+            "name": "l_knee",
+            "type": "legs",
+            "angleLimits": {
+                "min": 581,
+                "max": 2047
+            },
+            "positions": {
+                "standing": 1978
+            }
+        },
+        "l_ankle": {
+            "id": 15,
+            "name": "l_ankle",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1500,
+                "max": 2358
+            },
+            "positions": {
+                "standing": 1774
+            }
+        },
+
+        "r_hip_x": {
+            "id": 21,
+            "name": "r_hip_x",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1788,
+                "max": 2310
+            },
+            "positions": {
+                "standing": 1948
+            }
+        },
+        "r_hip_z": {
+            "id": 22,
+            "name": "r_hip_z",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1154,
+                "max": 2331
+            },
+            "positions": {
+                "standing": 2315
+            }
+        },
+        "r_hip_y": {
+            "id": 23,
+            "name": "r_hip_y",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1687,
+                "max": 3150
+            },
+            "positions": {
+                "standing": 1975
+            }
+        },
+        "r_knee": {
+            "id": 24,
+            "name": "r_knee",
+            "type": "legs",
+            "angleLimits": {
+                "min": 660,
+                "max": 2046
+            },
+            "positions": {
+                "standing": 1991
+            }
+        },
+        "r_ankle": {
+            "id": 25,
+            "name": "r_ankle",
+            "type": "legs",
+            "angleLimits": {
+                "min": 1505,
+                "max": 2384
+            },
+            "positions": {
+                "standing": 2099
+            }
+        },
+
+        "abs_y": {
+            "id": 31,
+            "name": "abs_y",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1700,
+                "max": 2200
+            },
+            "positions": {
+                "standing": 1990
+            }
+        },
+        "abs_x": {
+            "id": 32,
+            "name": "abs_x",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1710,
+                "max": 2294
+            },
+            "positions": {
+                "standing": 2023
+            }
+        },
+        "abs_z": {
+            "id": 33,
+            "name": "abs_z",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1540,
+                "max": 2700
+            },
+            "positions": {
+                "standing": 2020
+            }
+        },
+        "bust_y": {
+            "id": 34,
+            "name": "bust_y",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1635,
+                "max": 2230
+            },
+            "positions": {
+                "standing": 2040
+            }
+        },
+        "bust_x": {
+            "id": 35,
+            "name": "bust_x",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1640,
+                "max": 2450
+            },
+            "positions": {
+                "standing": 2042
+            }
+        },
+
+        "head_z": {
+            "id": 36,
+            "name": "head_z",
+            "type": "torso",
+            "angleLimits": {
+                "min": 342,
+                "max": 700
+            },
+            "positions": {
+                "standing": 505
+            }
+        },
+        "head_y": {
+            "id": 37,
+            "name": "head_y",
+            "type": "torso",
+            "angleLimits": {
+                "min": 398,
+                "max": 478
+            },
+            "positions": {
+                "standing": 410
+            }
+        },
+
+        "l_shoulder_y": {
+            "id": 41,
+            "name": "l_shoulder_y",
+            "type": "torso",
+            "angleLimits": {
+                "min": 688,
+                "max": 3570
+            },
+            "positions": {
+                "standing": 3095
+            }
+        },
+        "l_shoulder_x": {
+            "id": 42,
+            "name": "l_shoulder_x",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1200,
+                "max": 3257
+            },
+            "positions": {
+                "standing": 3252
+            }
+        },
+        "l_arm": {
+            "id": 43,
+            "name": "l_arm",
+            "type": "torso",
+            "angleLimits": {
+                "min": 810,
+                "max": 2880
+            },
+            "positions": {
+                "standing": 1834
+            }
+        },
+        "l_elbow": {
+            "id": 44,
+            "name": "l_elbow",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1021,
+                "max": 2570
+            },
+            "positions": {
+                "standing": 1230
+            }
+        },
+
+        "r_shoulder_y": {
+            "id": 51,
+            "name": "r_shoulder_y",
+            "type": "torso",
+            "angleLimits": {
+                "min": 530,
+                "max": 3480
+            },
+            "positions": {
+                "standing": 1035
+            }
+        },
+
+        "r_shoulder_x": {
+            "id": 52,
+            "name": "r_shoulder_x",
+            "type": "torso",
+            "angleLimits": {
+                "min": 1030,
+                "max": 3050
+            },
+            "positions": {
+                "standing": 1083
+            }
+        },
+
+        "r_arm": {
+            "id": 53,
+            "name": "r_arm",
+            "type": "torso",
+            "angleLimits": {
+                "min": 970,
+                "max": 3080
+            },
+            "positions": {
+                "standing": 2058
+            }
+        },
+
+        "r_elbow": {
+            "id": 54,
+            "name": "r_elbow",
+            "type": "torso",
+            "angleLimits": {
+                "min": 2032,
+                "max": 3580
+            },
+            "positions": {
+                "standing": 2222
+            }
+        }
+    }
+}

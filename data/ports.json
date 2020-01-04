@@ -1,0 +1,12 @@
+{
+    "legs": {
+        "port": "/dev/ttyACM0",
+        "baudrate": 1000000,
+        "timeout": 0.05
+    },
+    "torso": {
+        "port": "/dev/ttyACM1",
+        "baudrate": 1000000,
+        "timeout": 0.05
+    }
+}
