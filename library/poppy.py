@@ -1,7 +1,8 @@
 from library.motor import Motor
-from library.protocol import clearPort
+from library.protocol import pingCommand, writeCommand, clearPort
 from serial import Serial, SerialException
 import json
+import time
 
 motorsLegs = []
 motorsTorso = []
@@ -23,23 +24,31 @@ class Poppy:
                 self.serialPortLegs.baudrate = int(dataLegs['baudrate'])
                 self.serialPortLegs.timeout = int(dataLegs['timeout'])
                 self.serialPortLegs.open()
+                pingCommand(self.serialPortLegs, 1)
+                writeCommand(self.serialPortLegs, 1, 25, 1, 1)
             except SerialException:
                 print('Porta das pernas ja esta sendo usada!')
                 print('Programa abortado!')
                 self.serialPortLegs.close()
                 exit()
 
+            time.sleep(1.5)
+
             try:
                 self.serialPortTorso.port = dataTorso['port']
                 self.serialPortTorso.baudrate = int(dataTorso['baudrate'])
                 self.serialPortTorso.timeout = int(dataTorso['timeout'])
                 self.serialPortTorso.open()
+                pingCommand(self.serialPortTorso, 1)
+                writeCommand(self.serialPortTorso, 1, 25, 1, 1)
             except SerialException:
                 print('Porta do torso ja esta sendo usada!')
                 print('Programa abortado!')
                 self.serialPortLegs.close()
                 self.serialPortTorso.close()
                 exit()
+
+            time.sleep(1.5)
 
         with open("data/motors.json") as motors:
             motorsData = json.load(motors)
@@ -91,10 +100,6 @@ class Poppy:
 
             name = ''
             limits = {}
-
-        print('\n\n')
-        for id, motor in self.motors.items():
-            print(str(motor))
 
     def open(self):
         self.serialPortLegs.open()

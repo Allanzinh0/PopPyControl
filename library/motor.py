@@ -21,7 +21,7 @@ class Motor:
                 if ping['status'] == 'OK':
                     break
                 else:
-                    p = 'Tentando conexão com o motor {} id {}'.format(
+                    p = 'Tentando conexao com o motor {} id {}'.format(
                         self.name,
                         self.id
                     )
@@ -33,35 +33,41 @@ class Motor:
                             self.id
                         )
                         print(p)
-                        print('Programa abortado!')
-                        self.robot.close()
-                        exit()
+                        # print('Programa abortado!')
+                        # self.robot.close()
+                        # exit()
                     tentativas += 1
 
         print('Motor {} id {} conectado!'.format(self.name, self.id))
 
     def __str__(self):
-        ping = self.ping()
-        if ping['status'] == 'OK':
-            res = "<Motor "
-            res += "id:{}; ".format(self.id)
-            res += "name:{}; ".format(self.name)
-            res += "position:{}; ".format(self.getPosition())
-            res += "torque:{}; ".format(self.getTorque())
-            res += "led:{}>".format(self.getLED())
-            return res
+        if not testMotors:
+            ping = self.ping()
+            if ping['status'] == 'OK':
+                res = "<Motor "
+                res += "id:{}; ".format(self.id)
+                res += "name:{}; ".format(self.name)
+                res += "position:{}; ".format(self.getPosition())
+                res += "torque:{}; ".format(self.getTorque())
+                res += "led:{}>".format(self.getLED())
+                return res
+            else:
+                res = "<Motor "
+                res += "id:{}; ".format(self.id)
+                res += "name:{}; ".format(self.name)
+                res += "error:{}>".format(ping['status'])
+                return res
         else:
             res = "<Motor "
             res += "id:{}; ".format(self.id)
-            res += "name:{}; ".format(self.name)
-            res += "error:{}>".format(ping['status'])
+            res += "name:{}>".format(self.name)
             return res
 
     def getLoad(self):
         response = self.read(40, 2)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id)
             )
@@ -80,7 +86,7 @@ class Motor:
         response = self.read(38, 2)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))
@@ -98,7 +104,7 @@ class Motor:
         response = self.read(43, 1)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))
@@ -116,7 +122,7 @@ class Motor:
         response = self.read(30, 2)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))
@@ -135,7 +141,7 @@ class Motor:
         response = self.read(24, 1)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))
@@ -153,7 +159,7 @@ class Motor:
         response = self.read(25, 1)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))
@@ -171,7 +177,7 @@ class Motor:
         response = self.read(34, 2)
 
         if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexão!'.format(
+            print('Motor {} id {} com problema na conexao!'.format(
                 self.name,
                 self.id
             ))

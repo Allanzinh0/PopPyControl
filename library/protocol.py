@@ -1,107 +1,46 @@
 from time import sleep
 
 # Variavel de tempo
-delaytime = 10 / (10 ** 6)
+delaytime = 100 / (10 ** 6)
 
 
-def pingCommand(port, id):
-    req = ''
-    res = ''
-
-    if type(id) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido!'}
-        return packet
-
-    checksum = int(255 - ((int(id) + 0x03) % 256))
-
-    req += chr(int(0xff))
-    req += chr(int(0xff))
-    req += chr(int(id))
-    req += chr(int(0x02))
-    req += chr(int(0x01))
-    req += chr(checksum)
-
+def write(port, req):
     port.write(req)
+    port.flush()
+    port.flush()
     sleep(delaytime)
 
-    request = ''
-    for a in req:
-        request += hex(ord(a)) + ' '
-    req = request
 
-    while True:
-        test = port.read()
-        if test != '':
-            res += hex(ord(test)) + ' '
-        else:
-            break
-
-    req = req.replace('0x', '').split(' ')
-
-    if len(res.split(' ')) < 7:
-        packet = {'req': req, 'res': res, 'status': 'Response Null'}
-        return packet
-
-    response = {
-        'received': res.replace('0x', '').split(' '),
-        'id': int(res.split(' ')[2], 16),
-        'error': int(res.split(' ')[4], 16),
-        'value': 'Null'
-    }
-
-    packet = {'req': req, 'res': response, 'status': 'OK'}
-    return packet
-
-
-def readCommand(port, id, address, size):
-    req = ''
+def read(port, req):
+    packet = {}
     res = ''
+    trys = 0
     value = 0
 
-    if type(id) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
-        return packet
-    elif type(address) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
-        return packet
-    elif type(size) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
-        return packet
+    while True:
+        test = port.read()
+        if len(test) != 0:
+            res += hex(ord(test)) + ' '
+        else:
+            trys += 1
 
-    checksum = int(255 - ((int(id) + 0x06 + int(address) + int(size)) % 256))
-
-    req += chr(int(0xff))
-    req += chr(int(0xff))
-    req += chr(int(id))
-    req += chr(int(0x04))
-    req += chr(int(0x02))
-    req += chr(int(address))
-    req += chr(int(size))
-    req += chr(checksum)
-
-    port.write(req)
-    sleep(delaytime)
+            if trys > 3:
+                break
 
     request = ''
     for a in req:
         request += hex(ord(a)) + ' '
     req = request
 
-    while True:
-        test = port.read()
-        if test != '':
-            res += hex(ord(test)) + ' '
-        else:
-            break
-
     req = req.replace('0x', '').split(' ')
 
     if len(res.split(' ')) < 7:
         packet = {'req': req, 'res': res, 'status': 'Response Null'}
+        sleep(delaytime)
         return packet
 
     elif len(res.split(' ')) == 7:
-        value = -1
+        value = 'Null'
 
     else:
         for val in res.split(' ')[5:-2][::-1]:
@@ -116,7 +55,55 @@ def readCommand(port, id, address, size):
     }
 
     packet = {'req': req, 'res': response, 'status': 'OK'}
+    sleep(delaytime*2)
+    print(packet)
     return packet
+
+
+def pingCommand(port, id):
+    req = ''
+    res = ''
+
+    if type(id) != int:
+        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido!'}
+        sleep(delaytime)
+        return packet
+
+    checksum = int(255 - ((int(id) + 0x03) % 256))
+
+    req += chr(int(0xff))
+    req += chr(int(0xff))
+    req += chr(int(id))
+    req += chr(int(0x02))
+    req += chr(int(0x01))
+    req += chr(checksum)
+
+    write(port, req)
+    return read(port, req)
+
+
+def readCommand(port, id, address, size):
+    req = ''
+    res = ''
+
+    if type(id) != int or type(address) != int or type(size) != int:
+        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
+        sleep(delaytime)
+        return packet
+
+    checksum = int(255 - ((int(id) + 0x06 + int(address) + int(size)) % 256))
+
+    req += chr(int(0xff))
+    req += chr(int(0xff))
+    req += chr(int(id))
+    req += chr(int(0x04))
+    req += chr(int(0x02))
+    req += chr(int(address))
+    req += chr(int(size))
+    req += chr(checksum)
+
+    write(port, req)
+    return read(port, req)
 
 
 def writeCommand(port, id, address, size, value):
@@ -125,15 +112,19 @@ def writeCommand(port, id, address, size, value):
 
     if type(id) != int:
         packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
+        sleep(delaytime)
         return packet
     elif type(address) != int:
         packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
+        sleep(delaytime)
         return packet
     elif type(size) != int:
         packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
+        sleep(delaytime)
         return packet
     elif type(value) != int:
         packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
+        sleep(delaytime)
         return packet
 
     value1 = 0
@@ -159,36 +150,8 @@ def writeCommand(port, id, address, size, value):
 
     req += chr(checksum)
 
-    port.write(req)
-    sleep(delaytime)
-
-    request = ''
-    for a in req:
-        request += hex(ord(a)) + ' '
-    req = request
-
-    while True:
-        test = port.read()
-        if test != '':
-            res += hex(ord(test)) + ' '
-        else:
-            break
-
-    req = req.replace('0x', '').split(' ')
-
-    if len(res.split(' ')) < 7:
-        packet = {'req': req, 'res': res, 'status': 'Response Null'}
-        return packet
-
-    response = {
-        'received': res.replace('0x', '').split(' '),
-        'id': int(res.split(' ')[2], 16),
-        'error': int(res.split(' ')[4], 16),
-        'value': 'Null'
-    }
-
-    packet = {'req': req, 'res': response, 'status': 'OK'}
-    return packet
+    write(port, req)
+    return read(port, req)
 
 
 def clearPort(serialPort):
@@ -196,3 +159,5 @@ def clearPort(serialPort):
         trash = serialPort.read()
         if trash == '':
             break
+        else:
+            print('Trashing...')
