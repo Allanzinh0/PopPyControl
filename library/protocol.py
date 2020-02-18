@@ -1,12 +1,11 @@
 from time import sleep
 
 # Variavel de tempo
-delaytime = 100 / (10 ** 6)
+delaytime = 0.001
 
 
 def write(port, req):
     port.write(req)
-    port.flush()
     port.flush()
     sleep(delaytime)
 
@@ -55,7 +54,7 @@ def read(port, req):
     }
 
     packet = {'req': req, 'res': response, 'status': 'OK'}
-    sleep(delaytime*2)
+    sleep(delaytime)
     print(packet)
     return packet
 
