@@ -2,7 +2,7 @@ from library.protocol import pingCommand, readCommand, writeCommand
 import time
 import json
 
-testMotors = False
+testMotors = True
 
 
 class Motor:
@@ -37,8 +37,7 @@ class Motor:
                         # self.robot.close()
                         # exit()
                     tentativas += 1
-
-        print('Motor {} id {} conectado!'.format(self.name, self.id))
+            print(self)
 
     def __str__(self):
         if not testMotors:

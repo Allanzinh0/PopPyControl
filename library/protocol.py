@@ -33,29 +33,41 @@ def read(port, req):
 
     req = req.replace('0x', '').split(' ')
 
+
     if len(res.split(' ')) < 7:
         packet = {'req': req, 'res': res, 'status': 'Response Null'}
         sleep(delaytime)
         return packet
 
-    elif len(res.split(' ')) == 7:
+    res = res.split(' ')
+    
+    if res[0] == '0x0':
+        del(res[0])
+
+    if res[::-1][1] == '0x0':
+        del(res[len(res) - 2])
+
+    if len(res) == 7:
         value = 'Null'
 
     else:
-        for val in res.split(' ')[5:-2][::-1]:
+        for val in res[5:-2][::-1]:
             value *= 256
             value += int(val, 16)
+    
+    for i in range(len(res)):
+        res[i] = res[i].replace('0x', '')
 
     response = {
-        'received': res.replace('0x', '').split(' '),
-        'id': int(res.split(' ')[2], 16),
-        'error': int(res.split(' ')[4], 16),
+        'received': res,
+        'id': int(res[2], 16),
+        'error': int(res[4], 16),
         'value': value
     }
 
     packet = {'req': req, 'res': response, 'status': 'OK'}
     sleep(delaytime)
-    print(packet)
+    print(res[2], ' - ', str(res))
     return packet
 
 
