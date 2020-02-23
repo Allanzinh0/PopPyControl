@@ -33,14 +33,15 @@ class Motor:
                             self.id
                         )
                         print(p)
-                        # print('Programa abortado!')
-                        # self.robot.close()
-                        # exit()
+                        print('Programa abortado!')
+                        self.robot.close()
+                        exit()
                     tentativas += 1
-            print(self)
+
+        print(self)
 
     def __str__(self):
-        if not testMotors:
+        if testMotors:
             ping = self.ping()
             if ping['status'] == 'OK':
                 res = "<Motor "

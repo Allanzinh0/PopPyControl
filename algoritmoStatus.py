@@ -1,15 +1,15 @@
 from library.poppy import Poppy
+import time
 
 robot = Poppy()
-delay = 1
 
 for id, motor in robot.motors.items():
-    motor.update()
-    motor.setTorque(0)
-    motor.setLED(0)
-    motor.setTorqueLimit(1023)
+    motor.setLED(1)
 
-print('-'*50)
-robot.status()
+time.sleep(1)
+
+for id, motor in robot.motors.items():
+    motor.setLED(0)
+
 robot.clear()
 robot.close()

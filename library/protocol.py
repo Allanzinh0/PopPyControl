@@ -1,10 +1,12 @@
 from time import sleep
 
 # Variavel de tempo
-delaytime = 0.001
+delaytime = 0.002
 
 
 def write(port, req):
+    clearPort(port)
+    sleep(delaytime)
     port.write(req)
     port.flush()
     sleep(delaytime)
@@ -33,14 +35,13 @@ def read(port, req):
 
     req = req.replace('0x', '').split(' ')
 
-
     if len(res.split(' ')) < 7:
         packet = {'req': req, 'res': res, 'status': 'Response Null'}
         sleep(delaytime)
         return packet
 
     res = res.split(' ')
-    
+
     if res[0] == '0x0':
         del(res[0])
 
@@ -54,12 +55,13 @@ def read(port, req):
         for val in res[5:-2][::-1]:
             value *= 256
             value += int(val, 16)
-    
+
+    resStr = []
     for i in range(len(res)):
-        res[i] = res[i].replace('0x', '')
+        resStr.append(res[i].replace('0x', ''))
 
     response = {
-        'received': res,
+        'received': resStr,
         'id': int(res[2], 16),
         'error': int(res[4], 16),
         'value': value
@@ -67,7 +69,7 @@ def read(port, req):
 
     packet = {'req': req, 'res': response, 'status': 'OK'}
     sleep(delaytime)
-    print(res[2], ' - ', str(res))
+    # print(str(int(res[2], 16)), '-', str(resStr))
     return packet
 
 
@@ -170,5 +172,3 @@ def clearPort(serialPort):
         trash = serialPort.read()
         if trash == '':
             break
-        else:
-            print('Trashing...')

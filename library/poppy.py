@@ -1,5 +1,5 @@
 from library.motor import Motor
-from library.protocol import pingCommand, writeCommand, clearPort
+from library.protocol import clearPort
 from serial import Serial, SerialException
 import json
 import time
@@ -24,8 +24,6 @@ class Poppy:
                 self.serialPortLegs.baudrate = int(dataLegs['baudrate'])
                 self.serialPortLegs.timeout = int(dataLegs['timeout'])
                 self.serialPortLegs.open()
-                pingCommand(self.serialPortLegs, 1)
-                writeCommand(self.serialPortLegs, 1, 25, 1, 1)
             except SerialException:
                 print('Porta das pernas ja esta sendo usada!')
                 print('Programa abortado!')
@@ -39,8 +37,6 @@ class Poppy:
                 self.serialPortTorso.baudrate = int(dataTorso['baudrate'])
                 self.serialPortTorso.timeout = int(dataTorso['timeout'])
                 self.serialPortTorso.open()
-                pingCommand(self.serialPortTorso, 1)
-                writeCommand(self.serialPortTorso, 1, 25, 1, 1)
             except SerialException:
                 print('Porta do torso ja esta sendo usada!')
                 print('Programa abortado!')
@@ -49,6 +45,8 @@ class Poppy:
                 exit()
 
             time.sleep(1.5)
+            clearPort(self.serialPortLegs)
+            clearPort(self.serialPortTorso)
 
         with open("data/motors.json") as motors:
             motorsData = json.load(motors)
@@ -123,12 +121,15 @@ class Poppy:
                 position = self.motors[id].getPosition()
 
                 if position != 0:
-                    if 5 < load and load < 1024:
+                    if 14 < load and load < 1024:
                         test = True
-                        self.motors[id].setPosition(position - 2)
-                    elif 1029 < load and load < 2048:
+                        self.motors[id].setPosition(position - 4)
+                    elif 1038 < load and load < 2048:
                         test = True
-                        self.motors[id].setPosition(position + 2)
+                        self.motors[id].setPosition(position + 4)
+
+                    if test:
+                        print('--{}--'.format(id))
 
             if not test:
                 break
