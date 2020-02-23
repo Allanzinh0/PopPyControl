@@ -72,7 +72,7 @@ class Motor:
                 self.id)
             )
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -91,7 +91,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -109,7 +109,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -127,7 +127,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -146,7 +146,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -164,7 +164,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,
@@ -182,7 +182,7 @@ class Motor:
                 self.id
             ))
         else:
-            if response['res']['error'] != 0:
+            if response['res']['error'] != '0b0':
                 print('Motor {} id {} com erro! Error: {}'.format(
                     self.name,
                     self.id,

@@ -63,7 +63,7 @@ def read(port, req):
     response = {
         'received': resStr,
         'id': int(res[2], 16),
-        'error': int(res[4], 16),
+        'error': str(bin(res[4])).replace('0b', ''),
         'value': value
     }
 
