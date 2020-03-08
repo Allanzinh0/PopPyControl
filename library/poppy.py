@@ -1,8 +1,11 @@
-from library.motor import Motor
-from library.protocol import clearPort
+from PopPyControl.motor import Motor
+from PopPyControl.protocol import clearPort
 from serial import Serial, SerialException
 import json
 import time
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 motorsLegs = []
 motorsTorso = []
@@ -15,7 +18,7 @@ class Poppy:
         self.serialPortLegs = Serial()
         self.serialPortTorso = Serial()
 
-        with open("data/ports.json") as ports:
+        with open(dir_path + "/data/ports.json") as ports:
             portsData = json.load(ports)
             dataLegs = portsData['legs']
             dataTorso = portsData['torso']
@@ -48,7 +51,7 @@ class Poppy:
             clearPort(self.serialPortLegs)
             clearPort(self.serialPortTorso)
 
-        with open("data/motors.json") as motors:
+        with open(dir_path + "/data/motors.json") as motors:
             motorsData = json.load(motors)
 
             for motorName in motorsData['motors']:
@@ -116,20 +119,17 @@ class Poppy:
         while True:
             test = False
 
-            for id in motorsID:
-                load = self.motors[id].getLoad()
-                position = self.motors[id].getPosition()
+            for motID in motorsID:
+                load = self.motors[motID].getLoad()
+                position = self.motors[motID].getPosition()
 
-                if position != 0:
+                if type(position) == int and type(load) == int:
                     if 14 < load and load < 1024:
                         test = True
-                        self.motors[id].setPosition(position - 4)
+                        self.motors[motID].setPosition(position - 4)
                     elif 1038 < load and load < 2048:
                         test = True
-                        self.motors[id].setPosition(position + 4)
-
-                    if test:
-                        print('--{}--'.format(id))
+                        self.motors[motID].setPosition(position + 4)
 
             if not test:
                 break
@@ -137,3 +137,7 @@ class Poppy:
     def clear(self):
         clearPort(self.serialPortLegs)
         clearPort(self.serialPortTorso)
+
+    def deactivate(self):
+        self.clear()
+        self.close()

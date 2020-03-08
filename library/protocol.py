@@ -1,3 +1,4 @@
+from PopPyControl.packet import Packet
 from time import sleep
 
 # Variavel de tempo
@@ -13,64 +14,21 @@ def write(port, req):
 
 
 def read(port, req):
-    packet = {}
     res = ''
     trys = 0
-    value = 0
 
     while True:
         test = port.read()
         if len(test) != 0:
-            res += hex(ord(test)) + ' '
+            res += test
         else:
             trys += 1
 
             if trys > 3:
                 break
 
-    request = ''
-    for a in req:
-        request += hex(ord(a)) + ' '
-    req = request
-
-    req = req.replace('0x', '').split(' ')
-
-    if len(res.split(' ')) < 7:
-        packet = {'req': req, 'res': res, 'status': 'Response Null'}
-        sleep(delaytime)
-        return packet
-
-    res = res.split(' ')
-
-    if res[0] == '0x0':
-        del(res[0])
-
-    if res[::-1][1] == '0x0':
-        del(res[len(res) - 2])
-
-    if len(res) == 7:
-        value = 'Null'
-
-    else:
-        for val in res[5:-2][::-1]:
-            value *= 256
-            value += int(val, 16)
-
-    resStr = []
-    for i in range(len(res)):
-        resStr.append(res[i].replace('0x', ''))
-
-    response = {
-        'received': resStr,
-        'id': int(res[2], 16),
-        'error': str(bin(res[4])).replace('0b', ''),
-        'value': value
-    }
-
-    packet = {'req': req, 'res': response, 'status': 'OK'}
     sleep(delaytime)
-    # print(str(int(res[2], 16)), '-', str(resStr))
-    return packet
+    return Packet(req, res)
 
 
 def pingCommand(port, id):
@@ -100,9 +58,8 @@ def readCommand(port, id, address, size):
     res = ''
 
     if type(id) != int or type(address) != int or type(size) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
 
     checksum = int(255 - ((int(id) + 0x06 + int(address) + int(size)) % 256))
 
@@ -124,21 +81,17 @@ def writeCommand(port, id, address, size, value):
     res = ''
 
     if type(id) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
     elif type(address) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
     elif type(size) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
     elif type(value) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
 
     value1 = 0
     value2 = 0

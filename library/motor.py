@@ -1,4 +1,4 @@
-from library.protocol import pingCommand, readCommand, writeCommand
+from PopPyControl.protocol import pingCommand, readCommand, writeCommand
 import time
 import json
 
@@ -18,7 +18,7 @@ class Motor:
             tentativas = 0
             while True:
                 ping = self.ping()
-                if ping['status'] == 'OK':
+                if ping.status == 'OK':
                     break
                 else:
                     p = 'Tentando conexao com o motor {} id {}'.format(
@@ -43,7 +43,7 @@ class Motor:
     def __str__(self):
         if testMotors:
             ping = self.ping()
-            if ping['status'] == 'OK':
+            if ping.status == 'OK':
                 res = "<Motor "
                 res += "id:{}; ".format(self.id)
                 res += "name:{}; ".format(self.name)
@@ -55,7 +55,7 @@ class Motor:
                 res = "<Motor "
                 res += "id:{}; ".format(self.id)
                 res += "name:{}; ".format(self.name)
-                res += "error:{}>".format(ping['status'])
+                res += "error:{}>".format(ping.status)
                 return res
         else:
             res = "<Motor "
@@ -66,131 +66,93 @@ class Motor:
     def getLoad(self):
         response = self.read(40, 2)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id)
-            )
+                self.id,
+                response.status
+            ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
-        return 0
+            return response.value
 
     def getSpeed(self):
         response = self.read(38, 2)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
+            return response.value
 
     def getTemperature(self):
         response = self.read(43, 1)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
+            return response.value
 
     def getPosition(self):
         response = self.read(30, 2)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
-        return 0
+            return response.value
 
     def getTorque(self):
         response = self.read(24, 1)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
+            return response.value
 
     def getLED(self):
         response = self.read(25, 1)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
+            return response.value
 
     def getTorqueLimit(self):
         response = self.read(34, 2)
 
-        if response['status'] != 'OK':
-            print('Motor {} id {} com problema na conexao!'.format(
+        if response.status != 'OK':
+            print('Motor {} id {} erro {}!'.format(
                 self.name,
-                self.id
+                self.id,
+                response.status
             ))
+            return None
         else:
-            if response['res']['error'] != '0b0':
-                print('Motor {} id {} com erro! Error: {}'.format(
-                    self.name,
-                    self.id,
-                    response['res']['error']
-                ))
-            else:
-                return response['res']['value']
-        return 0
+            return response.value
 
     def setPosition(self, position):
         if self.limits['min'] <= position <= self.limits['max']:
@@ -253,7 +215,7 @@ class Motor:
             load = self.getLoad()
             position = self.getPosition()
 
-            if position != 0 and torqueLimit != 0:
+            if type(position) == int and type(torqueLimit) == int:
                 if 5 < load and load < 1024:
                     self.setPosition(position - 2)
                 elif 1029 < load and load < 2048:
