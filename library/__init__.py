@@ -3,7 +3,7 @@ import sys, os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-print('Poppy Library v1.2.3')
+print('Poppy Library v1.2.4')
 
 if not os.path.isdir(dir_path + '/data'):
     os.mkdir(path=(dir_path + '/data/'))
@@ -14,7 +14,7 @@ try:
 except FileNotFoundError:
     print('Baixando Configuração das Portas')
 
-    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/data/ports.json')
+    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/library/data/ports.json')
     data = f.read()
     with open(dir_path + '/data/ports.json', 'wb') as code:
         code.write(data)
@@ -25,7 +25,7 @@ try:
 except FileNotFoundError:
     print('Baixando Configuração dos Motores')
 
-    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/data/motors.json')
+    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/library/data/motors.json')
     data = f.read()
     with open(dir_path + '/data/motors.json', 'wb') as code:
         code.write(data)
