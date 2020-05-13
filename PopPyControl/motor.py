@@ -72,6 +72,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -85,6 +87,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -98,6 +102,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -111,6 +117,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -124,6 +132,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -137,6 +147,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -150,6 +162,8 @@ class Motor:
                 self.id,
                 response.status
             ))
+
+            _ = input("Pressione qualquer tecla para continuar!")
             return None
         else:
             return response.value
@@ -168,7 +182,7 @@ class Motor:
                 self.limits['max']
             ))
             print('Pressione ENTER para abortar o codigo!')
-            a = raw_input('Ou "C" + ENTER para continuar: ')
+            a = input('Ou "C" + ENTER para continuar: ')
 
             if a == 'C':
                 return "Error"

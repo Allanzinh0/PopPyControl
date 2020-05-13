@@ -1,5 +1,5 @@
 .vscode/settings.json
-temp.py
-tmp.py
 temp/**
 tmp/**
+tmp.*
+temp.*
