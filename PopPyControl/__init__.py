@@ -14,7 +14,7 @@ try:
 except FileNotFoundError:
     print('Baixando Configuração das Portas')
 
-    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/library/data/ports.json')
+    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/PopPyControl/data/ports.json')
     data = f.read()
     with open(dir_path + '/data/ports.json', 'wb') as code:
         code.write(data)
@@ -25,7 +25,7 @@ try:
 except FileNotFoundError:
     print('Baixando Configuração dos Motores')
 
-    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/library/data/motors.json')
+    f = urllib.request.urlopen('https://raw.githubusercontent.com/Allanzinh0/PopPyControl/master/PopPyControl/data/motors.json')
     data = f.read()
     with open(dir_path + '/data/motors.json', 'wb') as code:
         code.write(data)
