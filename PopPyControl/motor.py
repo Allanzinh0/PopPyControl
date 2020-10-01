@@ -27,7 +27,7 @@ class Motor:
                     )
                     print(p)
                     time.sleep(0.1)
-                    if tentativas > 10:
+                    if tentativas > 5:
                         p = 'Falha ao se conectar com o motor {} id {}'.format(
                             self.name,
                             self.id

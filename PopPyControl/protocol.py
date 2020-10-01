@@ -10,16 +10,15 @@ def write(port, req):
     sleep(delaytime)
     port.write(req)
     port.flush()
-    sleep(delaytime)
 
 
 def read(port, req):
-    res = ''
+    res = b''
     trys = 0
 
     while True:
-        test = port.read()
-        if len(test) != 0:
+        test = port.read(size=1)
+        if test != b'':
             res += test
         else:
             trys += 1
@@ -32,30 +31,29 @@ def read(port, req):
 
 
 def pingCommand(port, id):
-    req = ''
+    req = b''
     res = ''
 
     if type(id) != int:
-        packet = {'req': req, 'res': res, 'status': 'Tipo Invalido!'}
         sleep(delaytime)
-        return packet
+        return Packet(req, res)
 
     checksum = int(255 - ((int(id) + 0x03) % 256))
 
-    req += chr(int(0xff))
-    req += chr(int(0xff))
-    req += chr(int(id))
-    req += chr(int(0x02))
-    req += chr(int(0x01))
-    req += chr(checksum)
+    req += b'\xff'
+    req += b'\xff'
+    req += bytes([id])
+    req += b'\x02'
+    req += b'\x01'
+    req += bytes([checksum])
 
     write(port, req)
     return read(port, req)
 
 
 def readCommand(port, id, address, size):
-    req = ''
-    res = ''
+    req = b''
+    res = b''
 
     if type(id) != int or type(address) != int or type(size) != int:
         sleep(delaytime)
@@ -63,22 +61,22 @@ def readCommand(port, id, address, size):
 
     checksum = int(255 - ((int(id) + 0x06 + int(address) + int(size)) % 256))
 
-    req += chr(int(0xff))
-    req += chr(int(0xff))
-    req += chr(int(id))
-    req += chr(int(0x04))
-    req += chr(int(0x02))
-    req += chr(int(address))
-    req += chr(int(size))
-    req += chr(checksum)
+    req += b'\xff'
+    req += b'\xff'
+    req += bytes([id])
+    req += b'\x04'
+    req += b'\x02'
+    req += bytes([address])
+    req += bytes([size])
+    req += bytes([checksum])
 
     write(port, req)
     return read(port, req)
 
 
 def writeCommand(port, id, address, size, value):
-    req = ''
-    res = ''
+    req = b''
+    res = b''
 
     if type(id) != int:
         sleep(delaytime)
@@ -97,24 +95,24 @@ def writeCommand(port, id, address, size, value):
     value2 = 0
     length = size + 3
 
-    req += chr(int(0xff))
-    req += chr(int(0xff))
-    req += chr(id)
-    req += chr(length)
-    req += chr(int(0x03))
-    req += chr(address)
+    req += b'\xff'
+    req += b'\xff'
+    req += bytes([id])
+    req += bytes([length])
+    req += b'\x03'
+    req += bytes([address])
 
     if size == 1:
-        req += chr(value)
+        req += bytes([value])
         checksum = 255 - ((id + length + 3 + address + value) % 256)
     elif size == 2:
         value1 = value % 256
-        value2 = (value - (value % 256))/256
-        req += chr(value1)
-        req += chr(value2)
+        value2 = int((value - (value % 256))/256)
+        req += bytes([value1])
+        req += bytes([value2])
         checksum = 255 - ((id + length + 3 + address + value1 + value2) % 256)
 
-    req += chr(checksum)
+    req += bytes([checksum])
 
     write(port, req)
     return read(port, req)
@@ -123,5 +121,5 @@ def writeCommand(port, id, address, size, value):
 def clearPort(serialPort):
     while True:
         trash = serialPort.read()
-        if trash == '':
+        if trash == b'':
             break
