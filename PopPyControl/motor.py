@@ -1,8 +1,10 @@
 from PopPyControl.protocol import pingCommand, readCommand, writeCommand
 import time
 import json
+import os
 
 testMotors = True
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 class Motor:
@@ -21,19 +23,20 @@ class Motor:
                 if ping.status == 'OK':
                     break
                 else:
-                    p = 'Tentando conexao com o motor {} id {}'.format(
+                    p = 'MOTOR: {} ID: {} STATUS: {}'.format(
                         self.name,
-                        self.id
+                        self.id,
+                        ping.status
                     )
                     print(p)
-                    time.sleep(0.1)
+                    time.sleep(0.05)
                     if tentativas > 5:
-                        p = 'Falha ao se conectar com o motor {} id {}'.format(
+                        p = 'MOTOR: {} ID: {} STATUS: FAILED'.format(
                             self.name,
                             self.id
                         )
                         print(p)
-                        print('Programa abortado!')
+                        print('Aborted program!')
                         self.robot.close()
                         exit()
                     tentativas += 1
@@ -67,13 +70,13 @@ class Motor:
         response = self.read(40, 2)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -82,13 +85,13 @@ class Motor:
         response = self.read(38, 2)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -97,13 +100,13 @@ class Motor:
         response = self.read(43, 1)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -112,13 +115,13 @@ class Motor:
         response = self.read(30, 2)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -127,13 +130,13 @@ class Motor:
         response = self.read(24, 1)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -142,13 +145,13 @@ class Motor:
         response = self.read(25, 1)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -157,13 +160,13 @@ class Motor:
         response = self.read(34, 2)
 
         if response.status != 'OK':
-            print('Motor {} id {} erro {}!'.format(
+            print('MOTOR: {} ID: {} ERROR: {}'.format(
                 self.name,
                 self.id,
                 response.status
             ))
 
-            _ = input("Pressione qualquer tecla para continuar!")
+            _ = input("Press any key to continue...")
             return None
         else:
             return response.value
@@ -172,19 +175,19 @@ class Motor:
         if self.limits['min'] <= position <= self.limits['max']:
             return self.write(30, 2, position)
         else:
-            print('Posicao {} fora dos limites do motor {} id {}!!!'.format(
+            print('Position {} outside motor limits <name: {}; id: {}>'.format(
                 position,
                 self.name,
                 self.id
             ))
-            print('Limites min {} e max {} desse motor!'.format(
+            print('Limits min {} and max {} from motor!'.format(
                 self.limits['min'],
                 self.limits['max']
             ))
-            print('Pressione ENTER para abortar o codigo!')
-            a = input('Ou "C" + ENTER para continuar: ')
+            print('Press ENTER to abort the code!')
+            a = input('Or "C" + ENTER to continue... ')
 
-            if a == 'C':
+            if a == 'C' or a == 'c':
                 return "Error"
             else:
                 self.robot.close()
@@ -210,7 +213,7 @@ class Motor:
         return writeCommand(self.serialPort, self.id, address, size, value)
 
     def update(self):
-        with open('data/motors.json') as motors:
+        with open(dir_path + '/data/motors.json') as motors:
             motorsData = json.load(motors)
             self.limits = {
                 'min': motorsData['motors'][self.name]['angleLimits']['min'],

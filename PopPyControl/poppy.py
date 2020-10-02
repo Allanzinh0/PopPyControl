@@ -25,11 +25,11 @@ class Poppy:
             try:
                 self.serialPortLegs.port = dataLegs['port']
                 self.serialPortLegs.baudrate = int(dataLegs['baudrate'])
-                self.serialPortLegs.timeout = int(dataLegs['timeout'])
+                self.serialPortLegs.timeout = float(dataLegs['timeout'])
                 self.serialPortLegs.open()
             except SerialException:
-                print('Porta das pernas ja esta sendo usada!')
-                print('Programa abortado!')
+                print('Leg port is already being used!')
+                print('Aborted program!')
                 self.serialPortLegs.close()
                 exit()
 
@@ -38,11 +38,11 @@ class Poppy:
             try:
                 self.serialPortTorso.port = dataTorso['port']
                 self.serialPortTorso.baudrate = int(dataTorso['baudrate'])
-                self.serialPortTorso.timeout = int(dataTorso['timeout'])
+                self.serialPortTorso.timeout = float(dataTorso['timeout'])
                 self.serialPortTorso.open()
             except SerialException:
-                print('Porta do torso ja esta sendo usada!')
-                print('Programa abortado!')
+                print('Torso port is already being used!')
+                print('Aborted program!')
                 self.serialPortLegs.close()
                 self.serialPortTorso.close()
                 exit()
