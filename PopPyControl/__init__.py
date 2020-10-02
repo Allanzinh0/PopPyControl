@@ -3,7 +3,7 @@ import sys, os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-print('Poppy Library v1.3.2')
+print('Poppy Library v1.3.3')
 
 if not os.path.isdir(dir_path + '/data'):
     os.mkdir(path=(dir_path + '/data/'))
