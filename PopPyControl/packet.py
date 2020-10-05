@@ -5,6 +5,7 @@ class Packet:
             self.status = 'Request Null'
         self.req = reqByte
 
+        resByte = bytearray(resByte)
         if len(resByte) == 0:
             self.status = 'Response Null'
         else:
