@@ -1,4 +1,4 @@
-from library.poppy import Poppy
+from PopPyControl.poppy import Poppy
 
 robot = Poppy()
 delay = 1
